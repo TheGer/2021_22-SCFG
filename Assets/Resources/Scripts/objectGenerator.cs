@@ -17,7 +17,7 @@ public class objectGenerator : MonoBehaviour
        squareParent = new GameObject();
        squareParent.name = "Cross-parent";
        squareParent.transform.position = new Vector3(0f,0f);
-       
+
 
        for (int counter = 0; counter < 4; counter++)
        {
@@ -28,19 +28,29 @@ public class objectGenerator : MonoBehaviour
             GameObject tempSquare = Instantiate(square,new Vector3(counter,0f),Quaternion.identity); 
             //3. Set a random colour for the square
             tempSquare.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+
+            tempSquare.transform.parent = squareParent.transform;
+
+          
             
              GameObject tempSquare2 = Instantiate(square,new Vector3(0f,counter),Quaternion.identity); 
             //3. Set a random colour for the square
             tempSquare2.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+
+            tempSquare2.transform.parent = squareParent.transform;
 
             //4 more lines to finish the cross
              GameObject tempSquare3 = Instantiate(square,new Vector3(0f,-counter),Quaternion.identity); 
             //3. Set a random colour for the square
             tempSquare3.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
 
+            tempSquare3.transform.parent = squareParent.transform;
+
             GameObject tempSquare4 = Instantiate(square,new Vector3(-counter,0f),Quaternion.identity); 
             //3. Set a random colour for the square
-            tempSquare.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+            tempSquare4.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+
+            tempSquare4.transform.parent = squareParent.transform;
             
 
 
