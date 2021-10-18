@@ -68,10 +68,21 @@ public class objectGenerator : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            squareParent.transform.position += new Vector3(0f,1f);
+            squareParent.transform.position -= new Vector3(0f,1f);
         }
 
         //horizontal is up to you
-        
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            squareParent.transform.position -= new Vector3(1f,0f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            squareParent.transform.position += new Vector3(1f,0f);
+        }
+
+
+
     }
 }
