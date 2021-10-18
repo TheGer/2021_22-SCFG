@@ -9,6 +9,8 @@ public class objectGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Hello My Name Is Gerry");
+        
        //1. Load square template from resources
        square = Resources.Load<GameObject>("Prefabs/Square");
        //2. Instantiate a square in the MIDDLE of the screen at 0 degree rotation
