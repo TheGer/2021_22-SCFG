@@ -54,8 +54,6 @@ public class objectGenerator : MonoBehaviour
             
 
 
-
-
         }
 
     }
@@ -63,6 +61,17 @@ public class objectGenerator : MonoBehaviour
         // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            squareParent.transform.position += new Vector3(0f,1f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            squareParent.transform.position += new Vector3(0f,1f);
+        }
+
+        //horizontal is up to you
         
     }
 }
