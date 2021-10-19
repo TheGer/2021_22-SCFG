@@ -6,14 +6,22 @@ public class objectGenerator : MonoBehaviour
 {
 
     //variable declarations
+    //variable 1
     string myName="";
+    //variable 2
     float temperature = 0.0f;
+    //variable 3
     int age = 0;
 
 
+    //variable 5
     //2 float variables to save the mouse position
     float mouseX,mouseY;
 
+    //variable 6
+    Vector3 mouseWorldCoordinates;
+
+    //variable 4
     GameObject square,squareParent;
     // Start is called before the first frame update
     void Start()
@@ -72,8 +80,9 @@ public class objectGenerator : MonoBehaviour
         mouseX = Input.mousePosition.x;
         mouseY = Input.mousePosition.y;
 
-        Debug.Log("Mouse Position:" + mouseX + "-" + mouseY);
+        mouseWorldCoordinates = Camera.main.ScreenToWorldPoint(new Vector3(mouseX,mouseY));
 
+        squareParent.transform.position = mouseWorldCoordinates;
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
