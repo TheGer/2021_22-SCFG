@@ -18,7 +18,6 @@ public class objectGenerator : MonoBehaviour
        squareParent.name = "Cross-parent";
        squareParent.transform.position = new Vector3(0f,0f);
 
-
        for (int counter = 0; counter < 4; counter++)
        {
            Debug.Log(counter); 
@@ -55,6 +54,9 @@ public class objectGenerator : MonoBehaviour
 
 
         }
+
+        //set the scale to 0.25 size
+        squareParent.transform.localScale = new Vector3(0.25f,0.25f);
 
     }
 
