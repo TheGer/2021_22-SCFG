@@ -80,9 +80,11 @@ public class objectGenerator : MonoBehaviour
         mouseX = Input.mousePosition.x;
         mouseY = Input.mousePosition.y;
 
-        mouseWorldCoordinates = Camera.main.ScreenToWorldPoint(new Vector3(mouseX,mouseY,0f));
+        mouseWorldCoordinates = Camera.main.ScreenToWorldPoint(new Vector3(mouseX,mouseY));
 
-        squareParent.transform.position = mouseWorldCoordinates;
+        
+
+        squareParent.transform.position= new Vector3(mouseWorldCoordinates.x,mouseWorldCoordinates.y);
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
