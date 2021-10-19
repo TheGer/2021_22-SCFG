@@ -82,9 +82,13 @@ public class objectGenerator : MonoBehaviour
 
         mouseWorldCoordinates = Camera.main.ScreenToWorldPoint(new Vector3(mouseX,mouseY));
 
-        
-
         squareParent.transform.position= new Vector3(mouseWorldCoordinates.x,mouseWorldCoordinates.y);
+
+        //Task to do for next lesson
+
+        //the square should EITHER move with the keyboard OR with the mouse.  If you press SPACE it will move with
+        //the keyboard, and if you press M it will move with the mouse.
+
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
