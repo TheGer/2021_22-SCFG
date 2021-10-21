@@ -5,113 +5,61 @@ using UnityEngine;
 public class objectGenerator : MonoBehaviour
 {
 
-    //variable declarations
-    //variable 1
-    string myName="";
-    //variable 2
-    float temperature = 0.0f;
-    //variable 3
-    int age = 0;
-
-
-    //variable 5
-    //2 float variables to save the mouse position
-    float mouseX,mouseY;
-
-    //variable 6
-    Vector3 mouseWorldCoordinates;
-
-    //variable 4
-    GameObject square,squareParent;
+    GameObject square,parentObject;
     // Start is called before the first frame update
     void Start()
     {
-       squareParent = new GameObject();
-       squareParent.name = "Cross-parent";
-       squareParent.transform.position = new Vector3(0f,0f);
+        squarecounter = 0;
+       //1. Load square template from resources
+       square = Resources.Load<GameObject>("Prefabs/Square");
+       //2. Instantiate a square in the MIDDLE of the screen at 0 degree rotation
+      // GameObject tempSquare = Instantiate(square,new Vector3(0f,0f),Quaternion.identity); 
+       //3. Set a random colour for the square
+     //  tempSquare.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+       //4. Find the coordinates of the edges of the square
+        generateNSquares(5);
 
-       for (int counter = 0; counter < 4; counter++)
-       {
-           Debug.Log(counter); 
-            //1. Load square template from resources
-            square = Resources.Load<GameObject>("Prefabs/Square");
-            //2. Instantiate a square in the MIDDLE of the screen at 0 degree rotation
-            GameObject tempSquare = Instantiate(square,new Vector3(counter,0f),Quaternion.identity); 
-            //3. Set a random colour for the square
-            tempSquare.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
-
-            tempSquare.transform.parent = squareParent.transform;
-
-          
-            
-             GameObject tempSquare2 = Instantiate(square,new Vector3(0f,counter),Quaternion.identity); 
-            //3. Set a random colour for the square
-            tempSquare2.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
-
-            tempSquare2.transform.parent = squareParent.transform;
-
-            //4 more lines to finish the cross
-             GameObject tempSquare3 = Instantiate(square,new Vector3(0f,-counter),Quaternion.identity); 
-            //3. Set a random colour for the square
-            tempSquare3.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
-
-            tempSquare3.transform.parent = squareParent.transform;
-
-            GameObject tempSquare4 = Instantiate(square,new Vector3(-counter,0f),Quaternion.identity); 
-            //3. Set a random colour for the square
-            tempSquare4.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
-
-            tempSquare4.transform.parent = squareParent.transform;
-            
-
-
-        }
-
-        //set the scale to 0.25 size
-        squareParent.transform.localScale = new Vector3(0.25f,0.25f);
-
+        parentObject.transform.localScale = new Vector3(0.25f,0.25f);
     }
+
+    //generate N squares horizontally
+
+    //modify this code to generate a full row, a full column, one diagonal going up
+    //and the opposite as well (similar to the English flag)
+    int squarecounter;
+    GameObject makeOneSquare(float x,float y,GameObject myparentobject)
+    {
+        GameObject tempSquare = Instantiate(square,new Vector3(x,y),Quaternion.identity); 
+        squarecounter++;
+        tempSquare.name = "Square-" + squarecounter;
+        tempSquare.transform.parent = myparentobject.transform;
+        tempSquare.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+        return tempSquare;
+    }
+    void generateNSquares(int numberOfSquares)
+    {
+        parentObject = new GameObject();
+        parentObject.name = "allSquares";
+        //for loop to generate N squares horizontally
+        for(int counter = -numberOfSquares; counter<= numberOfSquares; counter++)
+        {
+           makeOneSquare(counter,0f,parentObject); 
+           makeOneSquare(0f,counter,parentObject); 
+           makeOneSquare(counter,counter,parentObject);
+           makeOneSquare(counter,-counter,parentObject);
+        }
+    }
+
 
         // Update is called once per frame
     void Update()
     {
+        float mouseX = Input.mousePosition.x;
+        float mouseY = Input.mousePosition.y;
 
-        //get mouse coordinates 
-        mouseX = Input.mousePosition.x;
-        mouseY = Input.mousePosition.y;
+        Vector3 asterixPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseX,mouseY,0f));
 
-        mouseWorldCoordinates = Camera.main.ScreenToWorldPoint(new Vector3(mouseX,mouseY));
-
-        squareParent.transform.position= new Vector3(mouseWorldCoordinates.x,mouseWorldCoordinates.y);
-
-        //Task to do for next lesson
-
-        //the square should EITHER move with the keyboard OR with the mouse.  If you press SPACE it will move with
-        //the keyboard, and if you press M it will move with the mouse.
-
-
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            squareParent.transform.position += new Vector3(0f,1f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            squareParent.transform.position -= new Vector3(0f,1f);
-        }
-
-        //horizontal is up to you
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            squareParent.transform.position -= new Vector3(1f,0f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            squareParent.transform.position += new Vector3(1f,0f);
-        }
-
-
-
+        parentObject.transform.position = new Vector3(asterixPosition.x,asterixPosition.y);
+        
     }
 }
