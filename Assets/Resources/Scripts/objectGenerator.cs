@@ -100,7 +100,7 @@ public class objectGenerator : MonoBehaviour
         parentObject.transform.position = new Vector3(asterixPosition.x,asterixPosition.y);
     }
 
-    void keyboardControl(int keyspeed)
+    void keyboardControl(float keyspeed)
     {
         parentObject.transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * keyspeed * Time.deltaTime);
         parentObject.transform.Translate(Vector3.up * Input.GetAxis("Vertical") * keyspeed * Time.deltaTime);
@@ -117,7 +117,7 @@ public class objectGenerator : MonoBehaviour
        }else{
            keyboardControl(keyboardspeed);
        }
-       
+
        if (Input.GetKeyDown(KeyCode.Space))
        {
            usingMouse = !usingMouse;
