@@ -26,7 +26,7 @@ public class objectGenerator : MonoBehaviour
 
     bool usingMouse;
 
-    float keyboardSpeed;
+    public float keyboardSpeed;
 
     float[] reactionTimes;
 
@@ -110,7 +110,18 @@ public class objectGenerator : MonoBehaviour
         // Update is called once per frame
     void Update()
     {
+       if (usingMouse)
+       {
+           mouseControl();
+
+       }else{
+           keyboardControl(keyboardspeed);
+       }
        
+       if (Input.GetKeyDown(KeyCode.Space))
+       {
+           usingMouse = !usingMouse;
+       }
         
     }
 }
