@@ -90,9 +90,7 @@ public class objectGenerator : MonoBehaviour
         }
     }
 
-
-        // Update is called once per frame
-    void Update()
+    void mouseControl()
     {
         float mouseX = Input.mousePosition.x;
         float mouseY = Input.mousePosition.y;
@@ -100,6 +98,19 @@ public class objectGenerator : MonoBehaviour
         Vector3 asterixPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseX,mouseY,0f));
 
         parentObject.transform.position = new Vector3(asterixPosition.x,asterixPosition.y);
+    }
+
+    void keyboardControl(int keyspeed)
+    {
+        parentObject.transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * keyspeed * Time.deltaTime);
+        parentObject.transform.Translate(Vector3.up * Input.GetAxis("Vertical") * keyspeed * Time.deltaTime);
+    }
+
+
+        // Update is called once per frame
+    void Update()
+    {
+       
         
     }
 }
