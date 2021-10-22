@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class objectGenerator : MonoBehaviour
 {
@@ -23,11 +24,31 @@ public class objectGenerator : MonoBehaviour
     //After 15 rounds, the average reaction time of the user will be shown and the game
     //ends.
 
+    bool usingMouse;
+
+    float keyboardSpeed;
+
+    float[] reactionTimes;
+
+    string playerName;
+
+    int squarecounter;
+
+    Text inputSelectorText,roundTimerText;
 
     GameObject square,parentObject;
     // Start is called before the first frame update
     void Start()
     {
+        //get the input selector text
+        inputSelectorText = GameObject.Find("InputSelector").GetComponent<Text>();
+        //round timer text
+        roundTimerText = GameObject.Find("RoundTimer").GetComponent<Text>();
+
+        inputSelectorText.text = "M";
+
+        usingMouse = true;
+
         squarecounter = 0;
        //1. Load square template from resources
        square = Resources.Load<GameObject>("Prefabs/Square");
@@ -45,7 +66,7 @@ public class objectGenerator : MonoBehaviour
 
     //modify this code to generate a full row, a full column, one diagonal going up
     //and the opposite as well (similar to the English flag)
-    int squarecounter;
+  
     GameObject makeOneSquare(float x,float y,GameObject myparentobject)
     {
         GameObject tempSquare = Instantiate(square,new Vector3(x,y),Quaternion.identity); 
