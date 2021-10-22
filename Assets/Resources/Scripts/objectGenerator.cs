@@ -5,6 +5,25 @@ using UnityEngine;
 public class objectGenerator : MonoBehaviour
 {
 
+    //Reaction Time Game
+    //------------------
+    //Our reaction time is measured by the time taken for us to see something
+    //and take action about it.
+
+    //We will need to ask the user to input his/her name.
+
+    //In this case, we are going to generate a square every RANDOM interval
+    //for 15 times. We are going to measure the time FOR EACH square generated
+    //between the square being generated, and us clicking on the square.
+
+    //Each box will be a round, so we will inform the user before each box is going 
+    //to be generated, measure the reaction time, and move to the next round, informing
+    //the user of which round he/she is in.
+
+    //After 15 rounds, the average reaction time of the user will be shown and the game
+    //ends.
+
+
     GameObject square,parentObject;
     // Start is called before the first frame update
     void Start()
