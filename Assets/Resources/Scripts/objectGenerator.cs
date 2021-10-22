@@ -112,10 +112,14 @@ public class objectGenerator : MonoBehaviour
     {
        if (usingMouse)
        {
+           if (inputSelectorText.text != "M")
+                inputSelectorText.text = "M";
            mouseControl();
 
        }else{
-           keyboardControl(keyboardspeed);
+           if (inputSelectorText.text != "K")
+                inputSelectorText.text = "K";
+           keyboardControl(keyboardSpeed);
        }
 
        if (Input.GetKeyDown(KeyCode.Space))
