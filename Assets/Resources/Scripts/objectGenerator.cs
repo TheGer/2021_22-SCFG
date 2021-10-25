@@ -134,7 +134,7 @@ public class objectGenerator : MonoBehaviour
         else
         {
             //set up the movement here
-           squareParent.transform.Translate(Vector3.left * Input.GetAxis("Horizontal") * keySpeed * Time.deltaTime);
+           squareParent.transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * keySpeed * Time.deltaTime);
            squareParent.transform.Translate(Vector3.up * Input.GetAxis("Vertical") * keySpeed * Time.deltaTime);
 
         }
