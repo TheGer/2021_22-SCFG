@@ -13,6 +13,8 @@ public class objectGenerator : MonoBehaviour
     //variable 3
     int age = 0;
 
+    bool mouseControl = true;
+
 
     //variable 5
     //2 float variables to save the mouse position
@@ -75,43 +77,50 @@ public class objectGenerator : MonoBehaviour
         // Update is called once per frame
     void Update()
     {
+        //if mousecontrol is true
+        if (mouseControl) 
+        {
+            mouseX = Input.mousePosition.x;
+            mouseY = Input.mousePosition.y;
 
+            mouseWorldCoordinates = Camera.main.ScreenToWorldPoint(new Vector3(mouseX,mouseY));
+
+            squareParent.transform.position= new Vector3(mouseWorldCoordinates.x,mouseWorldCoordinates.y);
+
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                squareParent.transform.position += new Vector3(0f, 1f);
+            }
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                squareParent.transform.position -= new Vector3(0f, 1f);
+            }
+
+            //horizontal is up to you
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                squareParent.transform.position -= new Vector3(1f, 0f);
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                squareParent.transform.position += new Vector3(1f, 0f);
+            }
+
+        }
         //get mouse coordinates 
-        mouseX = Input.mousePosition.x;
-        mouseY = Input.mousePosition.y;
-
-        mouseWorldCoordinates = Camera.main.ScreenToWorldPoint(new Vector3(mouseX,mouseY));
-
-        squareParent.transform.position= new Vector3(mouseWorldCoordinates.x,mouseWorldCoordinates.y);
-
+      
         //Task to do for next lesson
 
         //the square should EITHER move with the keyboard OR with the mouse.  If you press SPACE it will move with
         //the keyboard, and if you press M it will move with the mouse.
 
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            squareParent.transform.position += new Vector3(0f,1f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            squareParent.transform.position -= new Vector3(0f,1f);
-        }
-
-        //horizontal is up to you
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            squareParent.transform.position -= new Vector3(1f,0f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            squareParent.transform.position += new Vector3(1f,0f);
-        }
-
-
+        
 
     }
 }
