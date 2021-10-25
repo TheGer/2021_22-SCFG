@@ -13,6 +13,8 @@ public class objectGenerator : MonoBehaviour
     //variable 3
     int age = 0;
 
+    float keyspeed = 25f;
+
     bool mouseControl = true;
 
     float timeToCompareTo;
@@ -131,26 +133,9 @@ public class objectGenerator : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                squareParent.transform.position += new Vector3(0f, 1f);
-            }
-
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                squareParent.transform.position -= new Vector3(0f, 1f);
-            }
-
-            //horizontal is up to you
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                squareParent.transform.position -= new Vector3(1f, 0f);
-            }
-
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                squareParent.transform.position += new Vector3(1f, 0f);
-            }
+            //set up the movement here
+           squareParent.transform.Translate(Vector3.left * Input.GetAxis("Horizontal") * keySpeed * Time.deltaTime);
+           squareParent.transform.Translate(Vector3.up * Input.GetAxis("Vertical") * keySpeed * Time.deltaTime);
 
         }
         //get mouse coordinates 
