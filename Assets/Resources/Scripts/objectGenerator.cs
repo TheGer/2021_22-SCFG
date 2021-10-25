@@ -72,6 +72,8 @@ public class objectGenerator : MonoBehaviour
         //set the scale to 0.25 size
         squareParent.transform.localScale = new Vector3(0.25f,0.25f);
 
+        Debug.Log("Time when game started: " + Time.time);
+
     }
 
         // Update is called once per frame
@@ -94,6 +96,13 @@ public class objectGenerator : MonoBehaviour
             mouseWorldCoordinates = Camera.main.ScreenToWorldPoint(new Vector3(mouseX,mouseY));
 
             squareParent.transform.position= new Vector3(mouseWorldCoordinates.x,mouseWorldCoordinates.y);
+
+            //click the left mouse button
+            if (Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("Time when clicked: " + Time.time);
+            }
+
 
         }
         else
