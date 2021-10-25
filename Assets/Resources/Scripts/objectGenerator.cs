@@ -77,6 +77,18 @@ public class objectGenerator : MonoBehaviour
     }
 
         // Update is called once per frame
+
+    //MEASURE:  The time difference between each click.  
+
+    //First click shows how long since start
+
+    //Second click shows how long since first click
+
+    //third click shows how long between second click and third click
+
+    //use a method to return a string to debug.log
+    
+
     void Update()
     {
         //if mousecontrol is true
