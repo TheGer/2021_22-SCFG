@@ -15,7 +15,9 @@ public class objectGenerator : MonoBehaviour
 
     bool mouseControl = true;
 
+    float timeToCompareTo;
 
+    int clickCounter;
     //variable 5
     //2 float variables to save the mouse position
     float mouseX,mouseY;
@@ -71,7 +73,7 @@ public class objectGenerator : MonoBehaviour
 
         //set the scale to 0.25 size
         squareParent.transform.localScale = new Vector3(0.25f,0.25f);
-
+        timeToCompareTo = Time.time;
         Debug.Log("Time when game started: " + Time.time);
 
     }
@@ -87,7 +89,14 @@ public class objectGenerator : MonoBehaviour
     //third click shows how long between second click and third click
 
     //use a method to return a string to debug.log
-    
+
+    //calculateDuration(20f,10f) - 10f
+    //calculateDuration(10f,20f) + 10f
+    float calculateDuration(float compareTo,float current)
+    {
+        return current-compareTo;
+    }
+
 
     void Update()
     {
@@ -112,7 +121,10 @@ public class objectGenerator : MonoBehaviour
             //click the left mouse button
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("Time when clicked: " + Time.time);
+                clickCounter++;
+                Debug.Log(calculateDuration(timeToCompareTo,Time.time)+" clicks:"+clickCounter);
+                timeToCompareTo = Time.time;
+            
             }
 
 
