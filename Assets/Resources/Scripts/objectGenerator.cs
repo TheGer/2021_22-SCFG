@@ -78,6 +78,14 @@ public class objectGenerator : MonoBehaviour
     void Update()
     {
         //if mousecontrol is true
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            mouseControl = !mouseControl;
+            Debug.Log("mouseControl:"+mouseControl.ToString());
+        }
+
+
+
         if (mouseControl) 
         {
             mouseX = Input.mousePosition.x;
