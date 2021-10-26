@@ -7,7 +7,7 @@ public class objectGenerator : MonoBehaviour
 
     //variable declarations
     //variable 1
-    string myName="";
+    string myName = "";
     //variable 2
     float temperature = 0.0f;
     //variable 3
@@ -22,23 +22,23 @@ public class objectGenerator : MonoBehaviour
     int clickCounter;
     //variable 5
     //2 float variables to save the mouse position
-    float mouseX,mouseY;
+    float mouseX, mouseY;
 
     //variable 6
     Vector3 mouseWorldCoordinates;
 
     //variable 4
-    GameObject square,squareParent;
+    GameObject square, squareParent;
 
 
-    GameObject startGameMenuPrefab;
+    GameObject startGameMenuPrefab,tempMenu;
 
     bool gameStarted = false;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
         if (gameStarted)
         {
             squareParent = new GameObject();
@@ -86,10 +86,16 @@ public class objectGenerator : MonoBehaviour
             squareParent.transform.localScale = new Vector3(0.25f, 0.25f);
             timeToCompareTo = Time.time;
             Debug.Log("Time when game started: " + Time.time);
+        } else {
+            //load the menu from file
+            startGameMenuPrefab = Resources.Load<GameObject>("Prefabs/StartGame");
+            //create the menu in the middle of the screen
+            tempMenu = Instantiate(startGameMenuPrefab,Vector3.zero,Quaternion.identity);
+
         }
     }
 
-        // Update is called once per frame
+    // Update is called once per frame
 
     //MEASURE:  The time difference between each click.  
 
@@ -103,9 +109,9 @@ public class objectGenerator : MonoBehaviour
 
     //calculateDuration(20f,10f) - 10f
     //calculateDuration(10f,20f) + 10f
-    float calculateDuration(float compareTo,float current)
+    float calculateDuration(float compareTo, float current)
     {
-        return current-compareTo;
+        return current - compareTo;
     }
 
 
@@ -115,27 +121,27 @@ public class objectGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             mouseControl = !mouseControl;
-            Debug.Log("mouseControl:"+mouseControl.ToString());
+            Debug.Log("mouseControl:" + mouseControl.ToString());
         }
 
 
 
-        if (mouseControl) 
+        if (mouseControl)
         {
             mouseX = Input.mousePosition.x;
             mouseY = Input.mousePosition.y;
 
-            mouseWorldCoordinates = Camera.main.ScreenToWorldPoint(new Vector3(mouseX,mouseY));
+            mouseWorldCoordinates = Camera.main.ScreenToWorldPoint(new Vector3(mouseX, mouseY));
 
-            squareParent.transform.position= new Vector3(mouseWorldCoordinates.x,mouseWorldCoordinates.y);
+            squareParent.transform.position = new Vector3(mouseWorldCoordinates.x, mouseWorldCoordinates.y);
 
             //click the left mouse button
             if (Input.GetMouseButtonDown(0))
             {
                 clickCounter++;
-                Debug.Log(calculateDuration(timeToCompareTo,Time.time)+" clicks:"+clickCounter);
+                Debug.Log(calculateDuration(timeToCompareTo, Time.time) + " clicks:" + clickCounter);
                 timeToCompareTo = Time.time;
-            
+
             }
 
 
@@ -143,19 +149,19 @@ public class objectGenerator : MonoBehaviour
         else
         {
             //set up the movement here
-           squareParent.transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * keySpeed * Time.deltaTime);
-           squareParent.transform.Translate(Vector3.up * Input.GetAxis("Vertical") * keySpeed * Time.deltaTime);
+            squareParent.transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * keySpeed * Time.deltaTime);
+            squareParent.transform.Translate(Vector3.up * Input.GetAxis("Vertical") * keySpeed * Time.deltaTime);
 
         }
         //get mouse coordinates 
-      
+
         //Task to do for next lesson
 
         //the square should EITHER move with the keyboard OR with the mouse.  If you press SPACE it will move with
         //the keyboard, and if you press M it will move with the mouse.
 
 
-        
+
 
     }
 }
