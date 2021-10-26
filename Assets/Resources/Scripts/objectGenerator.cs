@@ -122,7 +122,7 @@ public class objectGenerator : MonoBehaviour
     void Update()
     {
         //P starts the game
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && (!gameStarted))
         {
             Destroy(tempMenu);
             drawCross();
@@ -133,7 +133,7 @@ public class objectGenerator : MonoBehaviour
         }
 
         //Escape quits the game
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && (gameStarted))
         {
             Destroy(squareParent);
             drawMenu();
