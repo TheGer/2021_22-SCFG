@@ -85,16 +85,18 @@ public class objectGenerator : MonoBehaviour
         Debug.Log("Time when game started: " + Time.time);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void drawMenu()
     {
-
         //load the menu from file
         startGameMenuPrefab = Resources.Load<GameObject>("Prefabs/StartGame");
         //create the menu in the middle of the screen
         tempMenu = Instantiate(startGameMenuPrefab, Vector3.zero, Quaternion.identity);
+    }
 
-
+    // Start is called before the first frame update
+    void Start()
+    {
+       drawMenu();
     }
 
     // Update is called once per frame
@@ -119,41 +121,45 @@ public class objectGenerator : MonoBehaviour
 
     void Update()
     {
-        //if mousecontrol is true
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (gameStarted)
         {
-            mouseControl = !mouseControl;
-            Debug.Log("mouseControl:" + mouseControl.ToString());
-        }
-
-
-
-        if (mouseControl)
-        {
-            mouseX = Input.mousePosition.x;
-            mouseY = Input.mousePosition.y;
-
-            mouseWorldCoordinates = Camera.main.ScreenToWorldPoint(new Vector3(mouseX, mouseY));
-
-            squareParent.transform.position = new Vector3(mouseWorldCoordinates.x, mouseWorldCoordinates.y);
-
-            //click the left mouse button
-            if (Input.GetMouseButtonDown(0))
+            //if mousecontrol is true
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                clickCounter++;
-                Debug.Log(calculateDuration(timeToCompareTo, Time.time) + " clicks:" + clickCounter);
-                timeToCompareTo = Time.time;
-
+                mouseControl = !mouseControl;
+                Debug.Log("mouseControl:" + mouseControl.ToString());
             }
 
 
-        }
-        else
-        {
-            //set up the movement here
-            squareParent.transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * keySpeed * Time.deltaTime);
-            squareParent.transform.Translate(Vector3.up * Input.GetAxis("Vertical") * keySpeed * Time.deltaTime);
 
+            if (mouseControl)
+            {
+                mouseX = Input.mousePosition.x;
+                mouseY = Input.mousePosition.y;
+
+                mouseWorldCoordinates = Camera.main.ScreenToWorldPoint(new Vector3(mouseX, mouseY));
+
+                squareParent.transform.position = new Vector3(mouseWorldCoordinates.x, mouseWorldCoordinates.y);
+
+                //click the left mouse button
+                if (Input.GetMouseButtonDown(0))
+                {
+                    clickCounter++;
+                    Debug.Log(calculateDuration(timeToCompareTo, Time.time) + " clicks:" + clickCounter);
+                    timeToCompareTo = Time.time;
+
+                }
+
+
+            }
+            else
+            {
+                //set up the movement here
+                squareParent.transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * keySpeed * Time.deltaTime);
+                squareParent.transform.Translate(Vector3.up * Input.GetAxis("Vertical") * keySpeed * Time.deltaTime);
+
+            }
         }
         //get mouse coordinates 
 
