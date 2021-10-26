@@ -121,13 +121,22 @@ public class objectGenerator : MonoBehaviour
 
     void Update()
     {
+        //P starts the game
         if (Input.GetKeyDown(KeyCode.P))
         {
             Destroy(tempMenu);
             gameStarted = true;
+            //saving when the game actually started
             timeToCompareTo = Time.time;
         }
 
+        //Escape quits the game
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Destroy(squareParent);
+            drawMenu();
+            gameStarted = false;
+        }
 
 
         if (gameStarted)
