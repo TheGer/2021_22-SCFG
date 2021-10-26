@@ -29,55 +29,64 @@ public class objectGenerator : MonoBehaviour
 
     //variable 4
     GameObject square,squareParent;
+
+
+    GameObject startGameMenuPrefab;
+
+    bool gameStarted = false;
+
     // Start is called before the first frame update
     void Start()
     {
-       squareParent = new GameObject();
-       squareParent.name = "Cross-parent";
-       squareParent.transform.position = new Vector3(0f,0f);
 
-       for (int counter = 0; counter < 4; counter++)
-       {
-           Debug.Log(counter); 
-            //1. Load square template from resources
+        if (gameStarted)
+        {
+            squareParent = new GameObject();
+            squareParent.name = "Cross-parent";
+            squareParent.transform.position = new Vector3(0f, 0f);
             square = Resources.Load<GameObject>("Prefabs/Square");
-            //2. Instantiate a square in the MIDDLE of the screen at 0 degree rotation
-            GameObject tempSquare = Instantiate(square,new Vector3(counter,0f),Quaternion.identity); 
-            //3. Set a random colour for the square
-            tempSquare.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+            for (int counter = 0; counter < 4; counter++)
+            {
+                Debug.Log(counter);
+                //1. Load square template from resources
 
-            tempSquare.transform.parent = squareParent.transform;
+                //2. Instantiate a square in the MIDDLE of the screen at 0 degree rotation
+                GameObject tempSquare = Instantiate(square, new Vector3(counter, 0f), Quaternion.identity);
+                //3. Set a random colour for the square
+                tempSquare.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
 
-          
-            
-             GameObject tempSquare2 = Instantiate(square,new Vector3(0f,counter),Quaternion.identity); 
-            //3. Set a random colour for the square
-            tempSquare2.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
-
-            tempSquare2.transform.parent = squareParent.transform;
-
-            //4 more lines to finish the cross
-             GameObject tempSquare3 = Instantiate(square,new Vector3(0f,-counter),Quaternion.identity); 
-            //3. Set a random colour for the square
-            tempSquare3.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
-
-            tempSquare3.transform.parent = squareParent.transform;
-
-            GameObject tempSquare4 = Instantiate(square,new Vector3(-counter,0f),Quaternion.identity); 
-            //3. Set a random colour for the square
-            tempSquare4.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
-
-            tempSquare4.transform.parent = squareParent.transform;
-            
+                tempSquare.transform.parent = squareParent.transform;
 
 
+
+                GameObject tempSquare2 = Instantiate(square, new Vector3(0f, counter), Quaternion.identity);
+                //3. Set a random colour for the square
+                tempSquare2.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+
+                tempSquare2.transform.parent = squareParent.transform;
+
+                //4 more lines to finish the cross
+                GameObject tempSquare3 = Instantiate(square, new Vector3(0f, -counter), Quaternion.identity);
+                //3. Set a random colour for the square
+                tempSquare3.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+
+                tempSquare3.transform.parent = squareParent.transform;
+
+                GameObject tempSquare4 = Instantiate(square, new Vector3(-counter, 0f), Quaternion.identity);
+                //3. Set a random colour for the square
+                tempSquare4.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+
+                tempSquare4.transform.parent = squareParent.transform;
+
+
+
+            }
+
+            //set the scale to 0.25 size
+            squareParent.transform.localScale = new Vector3(0.25f, 0.25f);
+            timeToCompareTo = Time.time;
+            Debug.Log("Time when game started: " + Time.time);
         }
-
-        //set the scale to 0.25 size
-        squareParent.transform.localScale = new Vector3(0.25f,0.25f);
-        timeToCompareTo = Time.time;
-        Debug.Log("Time when game started: " + Time.time);
-
     }
 
         // Update is called once per frame
