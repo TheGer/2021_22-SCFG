@@ -125,7 +125,9 @@ public class objectGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             Destroy(tempMenu);
+            drawCross();
             gameStarted = true;
+
             //saving when the game actually started
             timeToCompareTo = Time.time;
         }
