@@ -121,6 +121,14 @@ public class objectGenerator : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Destroy(tempMenu);
+            gameStarted = true;
+            timeToCompareTo = Time.time;
+        }
+
+
 
         if (gameStarted)
         {
