@@ -12,6 +12,7 @@ public class objectGenerator : MonoBehaviour
     //and take action about it.
 
     //We will need to ask the user to input his/her name.
+    
 
     //In this case, we are going to generate a square every RANDOM interval
     //for 15 times. We are going to measure the time FOR EACH square generated
