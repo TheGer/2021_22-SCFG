@@ -64,6 +64,11 @@ public class objectGenerator : MonoBehaviour
             () => {
                 playerName = GameObject.Find("PlayerName").GetComponent<InputField>().text;
                 Debug.Log("Player name is: "+ playerName);
+                //destroy the menu
+                Destroy(menuInstance);
+                //start the round
+                startRound();
+                
             }
         );
         
