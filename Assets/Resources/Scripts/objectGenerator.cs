@@ -41,6 +41,8 @@ public class objectGenerator : MonoBehaviour
     //UI Variables
     GameObject hudPrefab,menuPrefab,hudInstance,menuInstance;
 
+    float timeToCompareTo;
+
     
     
     // Start is called before the first frame update
@@ -88,11 +90,18 @@ public class objectGenerator : MonoBehaviour
         setupMenu();
     }
 
+    int counter = 0;
+    void showDurationBetweenClicks()
+    {
+        counter++;
+        Debug.Log(counter+":"+(Time.time - timeToCompareTo));
+        timeToCompareTo = Time.time;
+    }
 
     void startRound()
     {
         hudInstance = Instantiate(hudPrefab,Vector3.zero,Quaternion.identity);
-      
+        timeToCompareTo = Time.time;
         //get the input selector text
         inputSelectorText = GameObject.Find("InputSelector").GetComponent<Text>();
         //round timer text
@@ -189,6 +198,11 @@ public class objectGenerator : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 backToMenu();
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                showDurationBetweenClicks();
             }
         }
 
