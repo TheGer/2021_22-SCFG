@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae9e2d0311dbec4f97bee46350cedc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyboardSpeed: 0
+  keyboardSpeed: 50
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

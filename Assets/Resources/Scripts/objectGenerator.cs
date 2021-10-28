@@ -80,6 +80,14 @@ public class objectGenerator : MonoBehaviour
     //when escape is pressed while the round is started, the hud and game should stop and I should go back
     //to the menu.
 
+    void backToMenu()
+    {
+        Destroy(hudInstance);
+        Destroy(parentObject);
+        gameStarted = false;
+        setupMenu();
+    }
+
 
     void startRound()
     {
@@ -176,6 +184,11 @@ public class objectGenerator : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 usingMouse = !usingMouse;
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                backToMenu();
             }
         }
 
