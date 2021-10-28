@@ -75,6 +75,8 @@ public class objectGenerator : MonoBehaviour
 
     void startRound()
     {
+        hudInstance = Instantiate(hudPrefab,Vector3.zero,Quaternion.identity);
+      
         //get the input selector text
         inputSelectorText = GameObject.Find("InputSelector").GetComponent<Text>();
         //round timer text
@@ -95,6 +97,8 @@ public class objectGenerator : MonoBehaviour
         generateNSquares(5);
 
         parentObject.transform.localScale = new Vector3(0.25f, 0.25f);
+
+        gameStarted=true;
     }
     //generate N squares horizontally
 
