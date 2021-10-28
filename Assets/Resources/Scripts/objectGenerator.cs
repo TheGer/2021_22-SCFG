@@ -40,6 +40,8 @@ public class objectGenerator : MonoBehaviour
     
     //UI Variables
     GameObject hudPrefab,menuPrefab,hudInstance,menuInstance;
+
+    
     
     // Start is called before the first frame update
     void Start()
@@ -50,7 +52,24 @@ public class objectGenerator : MonoBehaviour
         //hud prefab in the same way
         hudPrefab = Resources.Load<GameObject>("Prefabs/HUD");
         //draw the menu in the middle of the screen
+        setupMenu();
+    }
+
+    void setupMenu()
+    {
         menuInstance = Instantiate(menuPrefab,Vector3.zero,Quaternion.identity);
+
+        //PlayerName + StartButton
+        GameObject.Find("StartButton").GetComponent<Button>().onClick.AddListener(
+            () => {
+                playerName = GameObject.Find("PlayerName").GetComponent<InputField>().text;
+                Debug.Log("Player name is: "+ playerName);
+            }
+        );
+        
+        
+
+
     }
 
 
@@ -125,6 +144,7 @@ public class objectGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //only happens if gameStarted is true
         if (gameStarted)
         {
             if (usingMouse)
