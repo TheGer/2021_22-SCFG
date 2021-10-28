@@ -24,7 +24,7 @@ public class objectGenerator : MonoBehaviour
     //After 15 rounds, the average reaction time of the user will be shown and the game
     //ends.
 
-    bool usingMouse;
+    bool usingMouse,gameStarted;
 
     public float keyboardSpeed;
 
@@ -44,6 +44,7 @@ public class objectGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameStarted = false;
         //the name of the prefab in the actual folder is CaseSenSiTive
         menuPrefab = Resources.Load<GameObject>("Prefabs/StartMenu");
         //hud prefab in the same way
@@ -124,23 +125,26 @@ public class objectGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (usingMouse)
+        if (gameStarted)
         {
-            if (inputSelectorText.text != "M")
-                inputSelectorText.text = "M";
-            mouseControl();
+            if (usingMouse)
+            {
+                if (inputSelectorText.text != "M")
+                    inputSelectorText.text = "M";
+                mouseControl();
 
-        }
-        else
-        {
-            if (inputSelectorText.text != "K")
-                inputSelectorText.text = "K";
-            keyboardControl(keyboardSpeed);
-        }
+            }
+            else
+            {
+                if (inputSelectorText.text != "K")
+                    inputSelectorText.text = "K";
+                keyboardControl(keyboardSpeed);
+            }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            usingMouse = !usingMouse;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                usingMouse = !usingMouse;
+            }
         }
 
     }
