@@ -33,9 +33,9 @@ public class objectGenerator : MonoBehaviour
     //after a random interval, a box is spawned and the time is taken
     //I will then measure the time taken for the player to react to the box being spawned
     //that number is the score of round 1.
-    
 
-    bool usingMouse,gameStarted;
+
+    bool usingMouse, gameStarted;
 
     public float keyboardSpeed;
 
@@ -48,14 +48,14 @@ public class objectGenerator : MonoBehaviour
     Text inputSelectorText, roundTimerText;
 
     GameObject square, parentObject;
-    
+
     //UI Variables
-    GameObject hudPrefab,menuPrefab,countDownPrefab,hudInstance,menuInstance,countDownInstance;
+    GameObject hudPrefab, menuPrefab, countDownPrefab, hudInstance, menuInstance, countDownInstance;
 
     float timeToCompareTo;
 
-    
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,22 +72,23 @@ public class objectGenerator : MonoBehaviour
 
     void setupMenu()
     {
-        menuInstance = Instantiate(menuPrefab,Vector3.zero,Quaternion.identity);
+        menuInstance = Instantiate(menuPrefab, Vector3.zero, Quaternion.identity);
 
         //PlayerName + StartButton
         GameObject.Find("StartButton").GetComponent<Button>().onClick.AddListener(
-            () => {
+            () =>
+            {
                 playerName = GameObject.Find("PlayerName").GetComponent<InputField>().text;
-                Debug.Log("Player name is: "+ playerName);
+                Debug.Log("Player name is: " + playerName);
                 //destroy the menu
                 Destroy(menuInstance);
                 //start the round
                 StartCoroutine(showInstructions());
-                
+
             }
         );
-        
-        
+
+
 
 
     }
@@ -96,10 +97,11 @@ public class objectGenerator : MonoBehaviour
     IEnumerator showInstructions()
     {
         //show on screen
-        countDownInstance = Instantiate(countDownPrefab,Vector3.zero,Quaternion.identity);
-        countDownInstance.GetComponentInChildren<Text>().text = 
+        countDownInstance = Instantiate(countDownPrefab, Vector3.zero, Quaternion.identity);
+        countDownInstance.GetComponentInChildren<Text>().text =
         "A square will appear on a random location of the screen!\nClick on it as quickly as you can!";
         yield return new WaitForSeconds(1f);
+        Destroy(countDownInstance);
         yield return countDown();
     }
 
@@ -107,7 +109,7 @@ public class objectGenerator : MonoBehaviour
     //count down from 3
     IEnumerator countDown()
     {
-        while(countdownCounter>0)
+        while (countdownCounter > 0)
         {
             countDownInstance.GetComponentInChildren<Text>().text = countdownCounter.ToString();
             yield return new WaitForSeconds(1f);
@@ -116,7 +118,7 @@ public class objectGenerator : MonoBehaviour
         startRound();
         yield return null;
     }
-    
+
 
     //when escape is pressed while the round is started, the hud and game should stop and I should go back
     //to the menu.
@@ -133,13 +135,13 @@ public class objectGenerator : MonoBehaviour
     void showDurationBetweenClicks()
     {
         counter++;
-        Debug.Log(counter+":"+(Time.time - timeToCompareTo));
+        Debug.Log(counter + ":" + (Time.time - timeToCompareTo));
         timeToCompareTo = Time.time;
     }
 
     void startRound()
     {
-        hudInstance = Instantiate(hudPrefab,Vector3.zero,Quaternion.identity);
+        hudInstance = Instantiate(hudPrefab, Vector3.zero, Quaternion.identity);
         timeToCompareTo = Time.time;
         //get the input selector text
         inputSelectorText = GameObject.Find("InputSelector").GetComponent<Text>();
@@ -162,7 +164,7 @@ public class objectGenerator : MonoBehaviour
 
         parentObject.transform.localScale = new Vector3(0.25f, 0.25f);
 
-        gameStarted=true;
+        gameStarted = true;
     }
     //generate N squares horizontally
 
@@ -233,7 +235,7 @@ public class objectGenerator : MonoBehaviour
             {
                 usingMouse = !usingMouse;
             }
-            
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 backToMenu();
