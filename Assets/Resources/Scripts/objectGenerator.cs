@@ -50,7 +50,7 @@ public class objectGenerator : MonoBehaviour
     GameObject square, parentObject;
     
     //UI Variables
-    GameObject hudPrefab,menuPrefab,hudInstance,menuInstance;
+    GameObject hudPrefab,menuPrefab,countDownPrefab,hudInstance,menuInstance,countDownInstance;
 
     float timeToCompareTo;
 
@@ -64,6 +64,8 @@ public class objectGenerator : MonoBehaviour
         menuPrefab = Resources.Load<GameObject>("Prefabs/StartMenu");
         //hud prefab in the same way
         hudPrefab = Resources.Load<GameObject>("Prefabs/HUD");
+        //countdown prefab in the same way
+        countDownPrefab = Resources.Load<GameObject>("Prefabs/CountDown");
         //draw the menu in the middle of the screen
         setupMenu();
     }
@@ -80,7 +82,7 @@ public class objectGenerator : MonoBehaviour
                 //destroy the menu
                 Destroy(menuInstance);
                 //start the round
-                startRound();
+                StartCoroutine(showInstructions());
                 
             }
         );
@@ -89,6 +91,32 @@ public class objectGenerator : MonoBehaviour
 
 
     }
+
+    //show instructions for one second
+    IEnumerator showInstructions()
+    {
+        //show on screen
+        countDownInstance = Instantiate(countDownPrefab,Vector3.zero,Quaternion.identity);
+        countDownInstance.GetComponentInChildren<Text>().text = 
+        "A square will appear on a random location of the screen!\nClick on it as quickly as you can!";
+        yield return new WaitForSeconds(1f);
+        yield return countDown();
+    }
+
+    int countdownCounter = 3;
+    //count down from 3
+    IEnumerator countDown()
+    {
+        while(countdownCounter>0)
+        {
+            countDownInstance.GetComponentInChildren<Text>().text = countdownCounter.ToString();
+            yield return new WaitForSeconds(1f);
+            countdownCounter--;
+        }
+        startRound();
+        yield return null;
+    }
+    
 
     //when escape is pressed while the round is started, the hud and game should stop and I should go back
     //to the menu.
