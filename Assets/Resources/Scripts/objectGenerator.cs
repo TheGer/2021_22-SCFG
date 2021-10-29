@@ -24,6 +24,17 @@ public class objectGenerator : MonoBehaviour
     //After 15 rounds, the average reaction time of the user will be shown and the game
     //ends.
 
+
+    //After the player enters his/her name and presses 'start', I want to show the following
+    //instruction: 
+    //A square will appear on a random location of the screen, click on it as quickly as you can
+    //after 1second, I want that text to become a countdown from 3
+    //when the countdown is 0, the countdown disappears
+    //after a random interval, a box is spawned and the time is taken
+    //I will then measure the time taken for the player to react to the box being spawned
+    //that number is the score of round 1.
+    
+
     bool usingMouse,gameStarted;
 
     public float keyboardSpeed;
