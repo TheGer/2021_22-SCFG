@@ -88,9 +88,6 @@ public class objectGenerator : MonoBehaviour
             }
         );
 
-
-
-
     }
 
     //show instructions for one second
@@ -101,7 +98,7 @@ public class objectGenerator : MonoBehaviour
         countDownInstance.GetComponentInChildren<Text>().text =
         "A square will appear on a random location of the screen!\nClick on it as quickly as you can!";
         yield return new WaitForSeconds(1f);
-        Destroy(countDownInstance);
+        
         yield return countDown();
     }
 
@@ -115,6 +112,7 @@ public class objectGenerator : MonoBehaviour
             yield return new WaitForSeconds(1f);
             countdownCounter--;
         }
+        Destroy(countDownInstance);
         startRound();
         yield return null;
     }
