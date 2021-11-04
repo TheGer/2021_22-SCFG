@@ -60,7 +60,8 @@ public class objectGenerator : MonoBehaviour
         float randomX = Random.Range(-4.5f,4.5f);
         float randomY = Random.Range(-4.5f,4.5f);
     
-        makeOneSquare(randomX,randomY,enemyBoxParent);
+        GameObject enemySquare = makeOneSquare(randomX,randomY,enemyBoxParent);
+        enemySquare.AddComponent<BoxCollider2D>();
         //coroutine ends here
         yield return null;
 
