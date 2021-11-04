@@ -199,6 +199,7 @@ public class objectGenerator : MonoBehaviour
         parentObject.transform.localScale = new Vector3(0.25f, 0.25f);
 
         gameStarted = true;
+        playRound();
     }
     //generate N squares horizontally
 
