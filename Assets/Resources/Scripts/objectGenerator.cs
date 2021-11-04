@@ -238,6 +238,19 @@ public class objectGenerator : MonoBehaviour
         Vector3 asterixPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseX, mouseY, 0f));
 
         parentObject.transform.position = new Vector3(asterixPosition.x, asterixPosition.y);
+        //this method will use raycast to shoot a ray in 
+        //this means left click
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit2D hit = Physics2D.Raycast(asterixPosition,Vector3.forward);
+            if (hit.collider != null)
+            {
+                Destroy(hit.collider.gameObject);
+                float reactiontime = Time.time - timeToCompareTo;
+                Debug.Log(reactiontime);
+            }
+        }
+
     }
 
     void keyboardControl(float keyspeed)
