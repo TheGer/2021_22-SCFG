@@ -290,10 +290,7 @@ public class objectGenerator : MonoBehaviour
                 backToMenu();
             }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                showDurationBetweenClicks();
-            }
+          
         }
 
     }
