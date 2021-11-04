@@ -35,6 +35,15 @@ public class objectGenerator : MonoBehaviour
     //that number is the score of round 1.
 
 
+    //Each round of the game, will work as follows:
+    //1. I will wait for a random interval, after which I will generate a random square 
+    //   on screen.
+    //2. I will save the time when the random square was generated
+    //3. When the player click ON THE SQUARE only, the square will disappear and the round ends.
+    //4. I will display the reaction time of that round and the round number
+    //5. Countdown again, and back to 1.
+
+
     bool usingMouse, gameStarted;
 
     public float keyboardSpeed;
