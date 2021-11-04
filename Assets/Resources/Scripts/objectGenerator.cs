@@ -43,6 +43,29 @@ public class objectGenerator : MonoBehaviour
     //4. I will display the reaction time of that round and the round number
     //5. Countdown again, and back to 1.
 
+    
+    void playRound()
+    {
+        StartCoroutine(generateRandomSquare());
+    }
+
+    GameObject enemyBoxParent;
+
+    IEnumerator generateRandomSquare()
+    {
+        //1. Wait a random interval
+        yield return new WaitForSeconds(Random.Range(0f,2f));
+        //save the time when the box is generated
+        timeToCompareTo = Time.time;
+        float randomX = Random.Range(-4.5f,4.5f);
+        float randomY = Random.Range(-4.5f,4.5f);
+    
+        makeOneSquare(randomX,randomY,enemyBoxParent);
+        //coroutine ends here
+        yield return null;
+
+    }
+
 
     bool usingMouse, gameStarted;
 
@@ -75,9 +98,13 @@ public class objectGenerator : MonoBehaviour
         hudPrefab = Resources.Load<GameObject>("Prefabs/HUD");
         //countdown prefab in the same way
         countDownPrefab = Resources.Load<GameObject>("Prefabs/CountDown");
+
+        //group all enemy boxes under one parent
+        enemyBoxParent = new GameObject();
         //draw the menu in the middle of the screen
         setupMenu();
     }
+
 
     void setupMenu()
     {
@@ -122,7 +149,7 @@ public class objectGenerator : MonoBehaviour
             countdownCounter--;
         }
         Destroy(countDownInstance);
-        startRound();
+        startGame();
         yield return null;
     }
 
@@ -146,7 +173,7 @@ public class objectGenerator : MonoBehaviour
         timeToCompareTo = Time.time;
     }
 
-    void startRound()
+    void startGame()
     {
         hudInstance = Instantiate(hudPrefab, Vector3.zero, Quaternion.identity);
         timeToCompareTo = Time.time;
