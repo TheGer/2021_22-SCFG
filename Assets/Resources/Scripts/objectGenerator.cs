@@ -108,6 +108,8 @@ public class objectGenerator : MonoBehaviour
     {
         gameStarted = false;
 
+        reactionTimes = new float[10];
+
         currentRound = 1;
         //the name of the prefab in the actual folder is CaseSenSiTive
         menuPrefab = Resources.Load<GameObject>("Prefabs/StartMenu");
@@ -282,11 +284,41 @@ public class objectGenerator : MonoBehaviour
             {
                 Destroy(hit.collider.gameObject);
                 float reactiontime = Time.time - timeToCompareTo;
+                //-1 becase arrays start from 0
+                reactionTimes[currentRound - 1] = reactiontime;
                 Debug.Log(reactiontime);
-                StartCoroutine(gotoNextRound());
+                if (currentRound < 11) { 
+                    StartCoroutine(gotoNextRound());
+                }
+                else
+                {
+                    StartCoroutine(showAverageReactionTime());
+                }
             }
         }
 
+    }
+
+    IEnumerator showAverageReactionTime()
+    {
+
+        float totalTimes = 0;
+        float avgTime = 0;
+        foreach(float rtime in reactionTimes)
+        {
+            totalTimes += rtime;
+        }
+
+        GameObject highScoreInstance = Instantiate(countDownPrefab, Vector3.zero, Quaternion.identity);
+
+        avgTime = totalTimes / reactionTimes.Length;
+
+        highScoreInstance.GetComponentInChildren<Text>().text = "Congratulations Player: "+ playerName + " your average reaction time is: "
+            + avgTime.ToString() ;
+
+
+        yield return new WaitForSeconds(3f);
+        backToMenu();
     }
 
     void keyboardControl(float keyspeed)
