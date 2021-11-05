@@ -219,10 +219,12 @@ public class objectGenerator : MonoBehaviour
         //3. Set a random colour for the square
         //  tempSquare.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
         //4. Find the coordinates of the edges of the square
-        generateNSquares(5);
+        if (currentRound == 1)
+        { 
+            generateNSquares(5);
 
-        parentObject.transform.localScale = new Vector3(0.25f, 0.25f);
-
+            parentObject.transform.localScale = new Vector3(0.25f, 0.25f);
+        }
         gameStarted = true;
         playRound();
     }
