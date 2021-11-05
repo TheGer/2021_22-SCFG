@@ -164,6 +164,9 @@ public class objectGenerator : MonoBehaviour
                 "Get ready for Round: " + currentRound;
         }
         yield return new WaitForSeconds(1f);
+
+        //round counter in the top left corner
+        roundTimerText.text = currentRound.ToString();
         Debug.Log(countdownCounter);
         yield return countDown();
     }
