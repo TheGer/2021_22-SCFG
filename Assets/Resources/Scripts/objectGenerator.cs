@@ -162,11 +162,13 @@ public class objectGenerator : MonoBehaviour
         {
             countDownInstance.GetComponentInChildren<Text>().text =
                 "Get ready for Round: " + currentRound;
+            roundTimerText.text = currentRound.ToString();
         }
         yield return new WaitForSeconds(1f);
 
         //round counter in the top left corner
-        roundTimerText.text = currentRound.ToString();
+        
+        
         Debug.Log(countdownCounter);
         yield return countDown();
     }
