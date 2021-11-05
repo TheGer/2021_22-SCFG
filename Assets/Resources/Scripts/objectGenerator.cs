@@ -203,9 +203,26 @@ public class objectGenerator : MonoBehaviour
 
     void startGame()
     {
-        hudInstance = Instantiate(hudPrefab, Vector3.zero, Quaternion.identity);
+       
         timeToCompareTo = Time.time;
         //get the input selector text
+        
+        //1. Load square template from resources
+        square = Resources.Load<GameObject>("Prefabs/Square");
+        //2. Instantiate a square in the MIDDLE of the screen at 0 degree rotation
+        // GameObject tempSquare = Instantiate(square,new Vector3(0f,0f),Quaternion.identity); 
+        //3. Set a random colour for the square
+        //  tempSquare.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+        //4. Find the coordinates of the edges of the square
+        if (currentRound == 1)
+        {
+            hudInstance = Instantiate(hudPrefab, Vector3.zero, Quaternion.identity);
+
+            generateNSquares(5);
+
+            parentObject.transform.localScale = new Vector3(0.25f, 0.25f);
+        }
+
         inputSelectorText = GameObject.Find("InputSelector").GetComponent<Text>();
         //round timer text
         roundTimerText = GameObject.Find("RoundTimer").GetComponent<Text>();
@@ -215,19 +232,8 @@ public class objectGenerator : MonoBehaviour
         usingMouse = true;
 
         squarecounter = 0;
-        //1. Load square template from resources
-        square = Resources.Load<GameObject>("Prefabs/Square");
-        //2. Instantiate a square in the MIDDLE of the screen at 0 degree rotation
-        // GameObject tempSquare = Instantiate(square,new Vector3(0f,0f),Quaternion.identity); 
-        //3. Set a random colour for the square
-        //  tempSquare.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
-        //4. Find the coordinates of the edges of the square
-        if (currentRound == 1)
-        { 
-            generateNSquares(5);
 
-            parentObject.transform.localScale = new Vector3(0.25f, 0.25f);
-        }
+
         gameStarted = true;
         playRound();
     }
