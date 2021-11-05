@@ -292,7 +292,9 @@ public class objectGenerator : MonoBehaviour
                 //-1 becase arrays start from 0
                 reactionTimes[currentRound - 1] = reactiontime;
                 Debug.Log(reactiontime);
-                if (currentRound < 11) { 
+                if (currentRound < 10) {
+
+                    Debug.Log(currentRound);
                     StartCoroutine(gotoNextRound());
                 }
                 else
