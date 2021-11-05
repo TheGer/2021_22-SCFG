@@ -56,6 +56,7 @@ public class objectGenerator : MonoBehaviour
     {
         //first show the countdown
         currentRound++;
+        countdownCounter = 3;
         yield return showInstructions();
       
     }
@@ -135,7 +136,7 @@ public class objectGenerator : MonoBehaviour
                 //destroy the menu
                 Destroy(menuInstance);
 
-                countdownCounter = 3;
+               
                 //start the round
                 StartCoroutine(showInstructions());
 
@@ -161,7 +162,7 @@ public class objectGenerator : MonoBehaviour
                 "Get ready for Round: " + currentRound;
         }
         yield return new WaitForSeconds(1f);
-        
+        Debug.Log(countdownCounter);
         yield return countDown();
     }
 
