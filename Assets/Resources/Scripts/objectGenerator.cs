@@ -134,6 +134,8 @@ public class objectGenerator : MonoBehaviour
                 Debug.Log("Player name is: " + playerName);
                 //destroy the menu
                 Destroy(menuInstance);
+
+                countdownCounter = 3;
                 //start the round
                 StartCoroutine(showInstructions());
 
