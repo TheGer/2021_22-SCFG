@@ -46,7 +46,18 @@ public class objectGenerator : MonoBehaviour
     
     void playRound()
     {
+
+
         StartCoroutine(generateRandomSquare());
+    }
+
+
+    IEnumerator gotoNextRound()
+    {
+        //first show the countdown
+        currentRound++;
+        yield return showInstructions();
+      
     }
 
     GameObject enemyBoxParent;
@@ -78,6 +89,8 @@ public class objectGenerator : MonoBehaviour
 
     int squarecounter;
 
+    int currentRound;
+
     Text inputSelectorText, roundTimerText;
 
     GameObject square, parentObject;
@@ -93,6 +106,8 @@ public class objectGenerator : MonoBehaviour
     void Start()
     {
         gameStarted = false;
+
+        currentRound = 1;
         //the name of the prefab in the actual folder is CaseSenSiTive
         menuPrefab = Resources.Load<GameObject>("Prefabs/StartMenu");
         //hud prefab in the same way
@@ -131,9 +146,18 @@ public class objectGenerator : MonoBehaviour
     IEnumerator showInstructions()
     {
         //show on screen
+        
         countDownInstance = Instantiate(countDownPrefab, Vector3.zero, Quaternion.identity);
-        countDownInstance.GetComponentInChildren<Text>().text =
+        if (currentRound == 1)
+        {
+            countDownInstance.GetComponentInChildren<Text>().text =
         "A square will appear on a random location of the screen!\nClick on it as quickly as you can!";
+        }
+        else
+        {
+            countDownInstance.GetComponentInChildren<Text>().text =
+                "Get ready for Round: " + currentRound;
+        }
         yield return new WaitForSeconds(1f);
         
         yield return countDown();
@@ -248,6 +272,7 @@ public class objectGenerator : MonoBehaviour
                 Destroy(hit.collider.gameObject);
                 float reactiontime = Time.time - timeToCompareTo;
                 Debug.Log(reactiontime);
+                StartCoroutine(gotoNextRound());
             }
         }
 
